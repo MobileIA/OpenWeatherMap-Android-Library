@@ -19,7 +19,7 @@ allprojects {
 #### Step 2 : Download via ```Gradle```:
 
 ```java
-compile 'com.github.MobileIA:OpenWeatherMap-Android-Library:v1.1.1'
+compile 'com.github.MobileIA:OpenWeatherMap-Android-Library:v1.3.0'
 ```
 
 **Note: Remember to include the INTERNET permission to your manifest file**
@@ -241,5 +241,3 @@ helper.getThreeHourForecastByZipCode("94040", new OpenWeatherMapHelper.ThreeHour
 
 
 
-### Upcoming Feature
-1. 16 day / daily forecast 
