@@ -51,6 +51,7 @@ public class OpenWeatherMapHelper {
     public void setUnits(String units){
         options.put("units", units);
     }
+    public void setLanguage(String language){ this.options.put("lang", language); }
 
 
     private Throwable NoAppIdErrMessage() {
