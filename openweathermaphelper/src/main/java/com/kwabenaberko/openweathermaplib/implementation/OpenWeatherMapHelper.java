@@ -3,6 +3,7 @@ package com.kwabenaberko.openweathermaplib.implementation;
 import android.support.annotation.NonNull;
 
 import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
+import com.kwabenaberko.openweathermaplib.models.sixteenforecast.SixteenForecast;
 import com.kwabenaberko.openweathermaplib.models.threehourforecast.ThreeHourForecast;
 import com.kwabenaberko.openweathermaplib.network.OpenWeatherMapClient;
 import com.kwabenaberko.openweathermaplib.network.OpenWeatherMapService;
@@ -35,6 +36,11 @@ public class OpenWeatherMapHelper {
 
     public interface ThreeHourForecastCallback{
         void onSuccess(ThreeHourForecast threeHourForecast);
+        void onFailure(Throwable throwable);
+    }
+
+    public interface SixteenForecastCallback{
+        void onSuccess(SixteenForecast sixteenthreeHourForecast);
         void onFailure(Throwable throwable);
     }
 
@@ -261,5 +267,103 @@ public class OpenWeatherMapHelper {
         }
     }
 
+//    THREE HOUR FORECAST METHODS
+//    END
+
+
+//    SIXTEEN FORECAST METHODS
+//    START
+
+    //GET SIXTEEN FORECAST BY CITY NAME
+    public void getSixteenForecastByCityName(String city, final SixteenForecastCallback callback){
+        options.put("q", city);
+        openWeatherMapService.getSixteenForecastByCityName(options)
+                .enqueue(new Callback<SixteenForecast>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SixteenForecast> call, @NonNull Response<SixteenForecast> response) {
+                        HandleSixteenForecastResponse(response, callback);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<SixteenForecast> call, @NonNull Throwable throwable) {
+                        callback.onFailure(throwable);
+                    }
+                });
+
+    }
+
+    //GET THREE HOUR FORECAST BY CITY ID
+    public void getSixteenForecastByCityID(String id, final SixteenForecastCallback callback){
+        options.put("id", id);
+        openWeatherMapService.getSixteenForecastByCityID(options)
+                .enqueue(new Callback<SixteenForecast>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SixteenForecast> call, @NonNull Response<SixteenForecast> response) {
+                        HandleSixteenForecastResponse(response, callback);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<SixteenForecast> call, @NonNull Throwable throwable) {
+                        callback.onFailure(throwable);
+                    }
+                });
+
+    }
+
+    //GET THREE HOUR FORECAST BY GEO C0ORDINATES
+    public void getSixteenForecastByGeoCoordinates(double latitude, double longitude, final SixteenForecastCallback callback){
+        options.put("lat", String.valueOf(latitude));
+        options.put("lon", String.valueOf(longitude));
+        openWeatherMapService.getSixteenForecastByGeoCoordinates(options)
+                .enqueue(new Callback<SixteenForecast>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SixteenForecast> call, @NonNull Response<SixteenForecast> response) {
+                        HandleSixteenForecastResponse(response, callback);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<SixteenForecast> call, @NonNull Throwable throwable) {
+                        callback.onFailure(throwable);
+                    }
+                });
+
+    }
+
+    //GET THREE HOUR FORECAST BY ZIP CODE
+    public void getSixteenForecastByZipCode(String zipCode, final SixteenForecastCallback callback){
+        options.put("zip", zipCode);
+        openWeatherMapService.getSixteenForecastByZipCode(options)
+                .enqueue(new Callback<SixteenForecast>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SixteenForecast> call, @NonNull Response<SixteenForecast> response) {
+                        HandleSixteenForecastResponse(response, callback);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<SixteenForecast> call, @NonNull Throwable throwable) {
+                        callback.onFailure(throwable);
+                    }
+                });
+
+    }
+
+    private void HandleSixteenForecastResponse(Response<SixteenForecast> response, SixteenForecastCallback callback){
+        if (response.code() == HttpURLConnection.HTTP_OK){
+            callback.onSuccess(response.body());
+        }
+        else if (response.code() == HttpURLConnection.HTTP_FORBIDDEN || response.code() == HttpURLConnection.HTTP_UNAUTHORIZED){
+            callback.onFailure(NoAppIdErrMessage());
+        }
+        else{
+            try {
+                callback.onFailure(NotFoundErrMsg(response.errorBody().string()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+//    SIXTEEN FORECAST METHODS
+//    END
 
 }

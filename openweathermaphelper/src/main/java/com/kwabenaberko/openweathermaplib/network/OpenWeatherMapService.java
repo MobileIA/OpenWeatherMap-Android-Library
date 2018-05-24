@@ -1,6 +1,7 @@
 package com.kwabenaberko.openweathermaplib.network;
 
 import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
+import com.kwabenaberko.openweathermaplib.models.sixteenforecast.SixteenForecast;
 import com.kwabenaberko.openweathermaplib.models.threehourforecast.ThreeHourForecast;
 
 import java.util.Map;
@@ -42,4 +43,19 @@ public interface OpenWeatherMapService {
 
     @GET("/data/2.5/forecast")
     Call<ThreeHourForecast> getThreeHourForecastByZipCode(@QueryMap Map<String, String> options);
+    //Three hour forecast endpoints end
+
+    //16 day weather forecast endpoints start
+    @GET("/data/2.5/forecast/daily")
+    Call<SixteenForecast> getSixteenForecastByCityName(@QueryMap Map<String, String> options);
+
+    @GET("/data/2.5/forecast/daily")
+    Call<SixteenForecast> getSixteenForecastByCityID(@QueryMap Map<String, String> options);
+
+    @GET("/data/2.5/forecast/daily")
+    Call<SixteenForecast> getSixteenForecastByGeoCoordinates(@QueryMap Map<String, String> options);
+
+    @GET("/data/2.5/forecast/daily")
+    Call<SixteenForecast> getSixteenForecastByZipCode(@QueryMap Map<String, String> options);
+    //16 day weather forecast endpoints end
 }

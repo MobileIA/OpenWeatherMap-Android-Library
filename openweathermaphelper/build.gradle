@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.KwabenBerko'
+group = 'com.github.MobileIA'
 
 
 android {
@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 2
-        versionName "1.2.0"
+        versionCode 3
+        versionName "1.3.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

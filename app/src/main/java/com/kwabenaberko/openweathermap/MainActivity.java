@@ -7,6 +7,7 @@ import android.util.Log;
 import com.kwabenaberko.openweathermaplib.Units;
 import com.kwabenaberko.openweathermaplib.implementation.OpenWeatherMapHelper;
 import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
+import com.kwabenaberko.openweathermaplib.models.sixteenforecast.SixteenForecast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,23 @@ public class MainActivity extends AppCompatActivity {
                                 +"Temperature: " + currentWeather.getMain().getTempMax()+"\n"
                                 +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
                                 +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
+                );
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.v(TAG, throwable.getMessage());
+            }
+        });
+
+        helper.getSixteenForecastByCityName("Accra", new OpenWeatherMapHelper.SixteenForecastCallback() {
+            @Override
+            public void onSuccess(SixteenForecast sixteenthreeHourForecast) {
+                Log.v(TAG,
+                                "Weather Description: " + sixteenthreeHourForecast.getMessage() + "\n"
+                                +"Temperature: " + sixteenthreeHourForecast.getSixteenWeatherArray().get(0).getTemp().getDay()+"\n"
+                                +"Wind Speed: " + sixteenthreeHourForecast.getSixteenWeatherArray().get(0).getPressure() + "\n"
+                                +"City, Country: " + sixteenthreeHourForecast.getCity().getName() + ", " + sixteenthreeHourForecast.getCity().getCountry()
                 );
             }
 
