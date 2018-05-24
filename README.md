@@ -19,7 +19,7 @@ allprojects {
 #### Step 2 : Download via ```Gradle```:
 
 ```java
-compile 'com.github.KwabenBerko:OpenWeatherMap-Android-Library:v1.1.1'
+compile 'com.github.MobileIA:OpenWeatherMap-Android-Library:v1.1.1'
 ```
 
 **Note: Remember to include the INTERNET permission to your manifest file**
@@ -49,6 +49,11 @@ helper.setUnits(Units.IMPERIAL);
 
 2. ```Units.METRIC (Celsius)```
 
+#### Set your Language (Optional) 
+
+``` java 
+helper.setLanguage("es");
+```
 
 ## Features
 
